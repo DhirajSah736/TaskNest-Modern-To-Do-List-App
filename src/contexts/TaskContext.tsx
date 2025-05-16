@@ -49,7 +49,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
     
     try {
       setLoading(true);
-      const res = await axios.get('/tasks');
+      const res = await axios.get('/api/tasks');
       setTasks(res.data);
       setError(null);
     } catch (err: any) {
@@ -72,7 +72,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const createTask = async (taskData: Partial<Task>) => {
     try {
       setLoading(true);
-      const res = await axios.post('/tasks', taskData);
+      const res = await axios.post('/api/tasks', taskData);
       setTasks([res.data, ...tasks]);
       setError(null);
     } catch (err: any) {
@@ -87,7 +87,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const updateTask = async (id: string, taskData: Partial<Task>) => {
     try {
       setLoading(true);
-      const res = await axios.put(`/tasks/${id}`, taskData);
+      const res = await axios.put(`/api/tasks/${id}`, taskData);
       setTasks(tasks.map(task => (task._id === id ? res.data : task)));
       setError(null);
     } catch (err: any) {
@@ -102,7 +102,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const deleteTask = async (id: string) => {
     try {
       setLoading(true);
-      await axios.delete(`/tasks/${id}`);
+      await axios.delete(`/api/tasks/${id}`);
       setTasks(tasks.filter(task => task._id !== id));
       setError(null);
     } catch (err: any) {
@@ -117,7 +117,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const toggleTaskStatus = async (id: string) => {
     try {
       setLoading(true);
-      const res = await axios.put(`/tasks/${id}/toggle`);
+      const res = await axios.put(`/api/tasks/${id}/toggle`);
       setTasks(tasks.map(task => (task._id === id ? res.data : task)));
       setError(null);
     } catch (err: any) {
@@ -139,7 +139,7 @@ export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (filters.tag) params.append('tag', filters.tag);
       if (filters.search) params.append('search', filters.search);
       
-      const res = await axios.get(`/tasks/filter?${params.toString()}`);
+      const res = await axios.get(`/api/tasks/filter?${params.toString()}`);
       setTasks(res.data);
       setError(null);
     } catch (err: any) {
