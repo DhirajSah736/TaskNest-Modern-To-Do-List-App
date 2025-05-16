@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://task-nest-modern-to-do-list-app.vercel.app/',
+  origin: 'https://task-nest-modern-to-do-list-app.vercel.app',
   credentials: true
 }));
 
