@@ -146,7 +146,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // Update profile
   const updateProfile = async (name: string, email: string) => {
     try {
-      const res = await axios.put('/users/profile', { name, email });
+      const res = await axios.put('/api/users/profile', { name, email });
       setUser(res.data);
       setError(null);
     } catch (err: any) {
