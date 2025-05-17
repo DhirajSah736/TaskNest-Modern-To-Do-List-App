@@ -16,9 +16,8 @@ const sendTokenResponse = (user, statusCode, res) => {
   const cookieOptions = {
     expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
     httpOnly: true,
-    // secure: process.env.NODE_ENV === 'production',
-    secure:true,
-    sameSite:'None'
+    secure: process.env.NODE_ENV === 'production',
+    // sameSite:'None'
   };
 
   res
