@@ -5,20 +5,22 @@ import bcrypt from 'bcryptjs';
 // Generate JWT token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: '1h'
+    expiresIn: '30d'
   });
 };
 
 // Set cookie with token
 const sendTokenResponse = (user, statusCode, res) => {
   const token = generateToken(user._id);
+  const isProduction = process.env.NODE_ENV === 'production';
+
 
   const cookieOptions = {
-    expires: new Date(Date.now() + 1 * 60 * 60 * 1000),
+    maxAge: 30 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     // secure: process.env.NODE_ENV === 'production',
-    secure:true,
-    sameSite:'None'
+    secure:isProduction,
+    sameSite:isProduction?'None':'Lax'
   };
 
   res
