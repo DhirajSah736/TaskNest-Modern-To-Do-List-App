@@ -12,7 +12,7 @@ const generateToken = (id) => {
 // Set cookie with token
 const sendTokenResponse = (user, statusCode, res) => {
   const token = generateToken(user._id);
-  const isProduction = process.env.NODE_ENV === 'production';
+  // const isProduction = process.env.NODE_ENV === 'production';
 
 
   const cookieOptions = {
@@ -95,14 +95,20 @@ export const login = async (req, res) => {
 };
 
 // Logout user / clear cookie
-export const logout = (req, res) => {
-  res.cookie('jwt', '', {
-    httpOnly: true,
-    expires: new Date(0)
-  });
+// export const logout = (req, res) => {
+//   res.cookie('jwt', '', {
+//     httpOnly: true,
+//     expires: new Date(0)
+//   });
   
+//   res.status(200).json({ message: 'Logged out successfully' });
+// };
+
+export const logout = (req, res) => {
+  // No need to clear cookies since we're not using them
   res.status(200).json({ message: 'Logged out successfully' });
 };
+
 
 // Forgot password
 export const forgotPassword = async (req, res) => {
